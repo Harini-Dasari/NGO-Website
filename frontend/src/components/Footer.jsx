@@ -20,15 +20,17 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-grid">
-        <div className="footer-column">
-          <h4>SevaConnect</h4>
+        <div className="footer-column footer-brand">
+          <p className="footer-logo">
+            Seva<span>Connect</span>
+          </p>
           <p className="muted">
             Community-powered NGO connecting volunteers, donors, and local leaders to create lasting
             change across India.
           </p>
         </div>
         <div className="footer-column">
-          <p className="muted">Quick links</p>
+          <p className="footer-label">Quick links</p>
           <ul className="footer-links">
             {quickLinks.map((link) => (
               <li key={link.to}>
@@ -38,13 +40,13 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footer-column">
-          <p className="muted">Contact</p>
+          <p className="footer-label">Contact</p>
           <a href="mailto:hello@seva-connect.org">hello@seva-connect.org</a>
           <p>+91-90000-00000</p>
           <p className="muted">123 Hope Street, Hyderabad</p>
         </div>
         <div className="footer-column">
-          <p className="muted">Follow</p>
+          <p className="footer-label">Follow</p>
           <div className="footer-social">
             {socialLinks.map((social) => (
               <a key={social.label} href={social.href} target="_blank" rel="noreferrer">

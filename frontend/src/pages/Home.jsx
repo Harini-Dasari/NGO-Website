@@ -1,36 +1,33 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import heroImage from '../assets/landingimage.png'
+import BlurText from '../components/BlurText'
+import CircularGallery from '../components/CircularGallery'
+import api from '../services/api'
+import gallerySamples from '../data/gallerySamples'
 import styles from './Home.module.css'
 
 const impactStats = [
-  { label: 'Volunteers', value: '1,200+', copy: 'Community champions on call.', icon: '🤝' },
-  { label: 'Districts served', value: '15', copy: 'From coastal belts to hill hamlets.', icon: '🗺️' },
-  { label: 'Lives impacted', value: '65K+', copy: 'Families supported with dignity.', icon: '✨' },
-]
-
-const projects = [
   {
-    title: 'Food Distribution',
-    summary: 'Community kitchens and ration drives keep families nourished.',
-    impact: 'Provided meals to 500+ families',
-    category: 'Relief',
-    image:
-      'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1200&q=80',
+    label: 'Volunteers',
+    value: '1,200+',
+    copy: 'Community champions on call.',
+    icon: 'hands',
+    variant: 'Sunrise',
   },
   {
-    title: 'Learning Pods',
-    summary: 'Solar-powered classrooms for first-generation learners.',
-    impact: '90% exam success rate',
-    category: 'Education',
-    image:
-      'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80',
+    label: 'Districts served',
+    value: '15',
+    copy: 'From coastal belts to hill hamlets.',
+    icon: 'mapPin',
+    variant: 'Sky',
   },
   {
-    title: 'Mobile Health Camps',
-    summary: 'Nurses and volunteers conduct screenings in remote mandals.',
-    impact: '3,200+ health checkups',
-    category: 'Health',
-    image:
-      'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
+    label: 'Lives impacted',
+    value: '65K+',
+    copy: 'Families supported with dignity.',
+    icon: 'spark',
+    variant: 'Aurora',
   },
 ]
 
@@ -82,8 +79,85 @@ const testimonials = [
   },
 ]
 
-const heroImage =
-  'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80'
+const impactHighlights = [
+  { icon: '🛡️', text: 'Community verified data' },
+  { icon: '📡', text: 'Live volunteer dashboards' },
+  { icon: '📑', text: 'Audited fund utilization' },
+]
+
+const programHighlights = [
+  { icon: '⚡', label: 'Rapid relief teams', copy: '72-hour disaster mobilization' },
+  { icon: '📘', label: 'Learning pods', copy: 'Solar classrooms across 15 districts' },
+  { icon: '🩺', label: 'Mobile clinics', copy: 'Nurses + diagnostics on wheels' },
+]
+
+const normalizeCampGallery = (items = []) =>
+  items
+    .map((item) => ({
+      image: item.imageUrl ?? item.image,
+      text: item.title ?? item.text ?? item.caption ?? '',
+    }))
+    .filter((item) => item.image && item.text)
+
+const defaultCampGallery = normalizeCampGallery(gallerySamples).slice(0, 10)
+
+const statIcons = {
+  hands: (
+    <svg viewBox="0 0 32 32" role="presentation" focusable="false">
+      <path
+        d="M11 9c1.657 0 3 1.343 3 3v2.25l-.585.585a2 2 0 0 0 0 2.83l2.92 2.92a1.5 1.5 0 0 0 2.12 0l3.045-3.046A4 4 0 0 0 24 14.328V12c0-1.657-1.343-3-3-3h-1"
+        fill="none"
+        stroke="url(#handStroke)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 11c-1.657 0-3 1.343-3 3v2c0 2.21 1.79 4 4 4"
+        fill="none"
+        stroke="url(#handStroke)"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <defs>
+        <linearGradient id="handStroke" x1="6" x2="24" y1="9" y2="24" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#f57c00" />
+          <stop offset="1" stopColor="#ffb74d" />
+        </linearGradient>
+      </defs>
+    </svg>
+  ),
+  mapPin: (
+    <svg viewBox="0 0 32 32" role="presentation" focusable="false">
+      <path
+        d="M16 6c-3.038 0-5.5 2.462-5.5 5.5 0 4.375 5.5 10.5 5.5 10.5s5.5-6.125 5.5-10.5C21.5 8.462 19.038 6 16 6z"
+        fill="url(#pinGradient)"
+      />
+      <circle cx="16" cy="11.5" r="1.8" fill="#fff" />
+      <defs>
+        <linearGradient id="pinGradient" x1="10.5" x2="21.5" y1="6" y2="18" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#64b5f6" />
+          <stop offset="1" stopColor="#1976d2" />
+        </linearGradient>
+      </defs>
+    </svg>
+  ),
+  spark: (
+    <svg viewBox="0 0 32 32" role="presentation" focusable="false">
+      <path
+        d="M16 6l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8-4.8-1.7 4.8-1.7z"
+        fill="url(#sparkGradient)"
+      />
+      <path d="M9 22l1.2 2.4L12.6 26l-2.4 1.2L9 29.6 7.8 27.2 5.4 26l2.4-1.2z" fill="#ffd180" />
+      <defs>
+        <linearGradient id="sparkGradient" x1="11" x2="21" y1="6" y2="18" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#ffab40" />
+          <stop offset="1" stopColor="#ff7043" />
+        </linearGradient>
+      </defs>
+    </svg>
+  ),
+}
 
 const SectionHeader = ({ tag, title, subtitle }) => (
   <div className={styles.sectionHeader}>
@@ -93,32 +167,25 @@ const SectionHeader = ({ tag, title, subtitle }) => (
   </div>
 )
 
-const StatCard = ({ value, label, copy, icon }) => (
-  <article className={styles.impactCard}>
-    <span className={styles.statIcon} aria-hidden="true">
-      {icon}
-    </span>
-    <span className={styles.impactValue}>{value}</span>
-    <p className={styles.impactLabel}>{label}</p>
-    <p className="muted">{copy}</p>
-  </article>
-)
+const StatCard = ({ value, label, copy, icon, variant = 'Sunrise' }) => {
+  const iconSvg = statIcons[icon]
+  const cardClass = `${styles.impactCard} ${styles[`impactCard${variant}`] ?? ''}`
 
-const WorkCard = ({ project }) => (
-  <article className={`${styles.workCard} card-lift`}>
-    <div className={styles.workImage}>
-      <img src={project.image} alt={project.title} loading="lazy" />
-    </div>
-    <div className={styles.workBody}>
-      <div className={styles.workMeta}>
-        <span className="tag">{project.category}</span>
-        <span>{project.impact}</span>
+  return (
+    <article className={cardClass}>
+      <div className={styles.impactMetricHead}>
+        <span className={styles.statIcon} aria-hidden="true">
+          {iconSvg}
+        </span>
+        <div>
+          <span className={styles.impactValue}>{value}</span>
+          <p className={styles.impactLabel}>{label}</p>
+        </div>
       </div>
-      <h3>{project.title}</h3>
-      <p className="muted">{project.summary}</p>
-    </div>
-  </article>
-)
+      <p className={`${styles.impactCopy} muted`}>{copy}</p>
+    </article>
+  )
+}
 
 const GalleryTile = ({ item }) => (
   <div className={styles.galleryTile}>
@@ -136,15 +203,54 @@ const TestimonialCard = ({ testimonial }) => (
 )
 
 const Home = () => {
+  const [campGalleryItems, setCampGalleryItems] = useState(defaultCampGallery)
+
+  useEffect(() => {
+    let mounted = true
+
+    const fetchCampGallery = async () => {
+      try {
+        const { data } = await api.get('/gallery')
+        if (!mounted) return
+
+        const normalized = normalizeCampGallery(data?.items ?? [])
+        setCampGalleryItems(normalized.length ? normalized.slice(0, 12) : defaultCampGallery)
+      } catch (error) {
+        console.error('Camp gallery fetch failed:', error.message)
+        if (mounted) {
+          setCampGalleryItems(defaultCampGallery)
+        }
+      }
+    }
+
+    fetchCampGallery()
+
+    return () => {
+      mounted = false
+    }
+  }, [])
+
+  const handleHeroAnimationComplete = () => {
+    console.log('Hero text animation completed')
+  }
+
   return (
     <div className={styles.homePage}>
       {/* Hero section */}
       <section className={styles.heroSection}>
         <div>
           <p className={styles.heroEyebrow}>SevaConnect · Grassroots care</p>
-          <h1 className={styles.heroHeading}>
-            Together, for a <span className={styles.highlight}>brighter future</span>
-          </h1>
+          <BlurText
+            as="h1"
+            className={styles.heroHeading}
+            text="Together, for a brighter future"
+            delay={180}
+            animateBy="words"
+            direction="top"
+            highlightWords={['brighter', 'future']}
+            highlightClassName={styles.highlight}
+            onAnimationComplete={handleHeroAnimationComplete}
+          />
           <p className={styles.heroSubtext}>
             Empowering communities through compassion and action. We co-design education, health,
             and relief programs with local leaders so impact stays personal.
@@ -165,11 +271,21 @@ const Home = () => {
 
       {/* Impact stats */}
       <section className={styles.sectionShell}>
-        <SectionHeader
-          tag="Impact"
-          title="Impact that scales with trust"
-          subtitle="Transparent dashboards, community ownership, and relentless volunteers keep every rupee accountable."
-        />
+        <div className={styles.impactHeader}>
+          <SectionHeader
+            tag="Impact"
+            title="Impact that scales with trust"
+            subtitle="Transparent dashboards, community ownership, and relentless volunteers keep every rupee accountable."
+          />
+          <ul className={styles.impactHighlights}>
+            {impactHighlights.map((item) => (
+              <li key={item.text} className={styles.impactHighlightItem}>
+                <span aria-hidden="true">{item.icon}</span>
+                {item.text}
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className={styles.impactGrid}>
           {impactStats.map((item) => (
             <StatCard key={item.label} {...item} />
@@ -178,16 +294,42 @@ const Home = () => {
       </section>
 
       {/* Works showcase */}
-      <section className={styles.sectionShell}>
-        <SectionHeader
-          tag="Programs"
-          title="Stories of courage"
-          subtitle="Programs co-created with panchayat leaders, nurses, and youth clubs across 15 districts."
-        />
-        <div className={styles.worksGrid}>
-          {projects.map((project) => (
-            <WorkCard key={project.title} project={project} />
-          ))}
+      <section className={`${styles.sectionShell} ${styles.programsSection}`}>
+        <div className={styles.programsHeader}>
+          <SectionHeader
+            tag="Programs"
+            title="Stories of courage"
+            subtitle="Programs co-created with panchayat leaders, nurses, and youth clubs across 15 districts."
+          />
+          <div className={styles.programsHighlights}>
+            {programHighlights.map((item) => (
+              <article key={item.label} className={styles.programHighlightCard}>
+                <span aria-hidden="true">{item.icon}</span>
+                <div>
+                  <p className={styles.programHighlightLabel}>{item.label}</p>
+                  <p className={styles.programHighlightCopy}>{item.copy}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div className={styles.programGalleryWrap}>
+          <div className={styles.programGalleryViewport}>
+            <CircularGallery
+              items={campGalleryItems}
+              bend={1.8}
+              textColor="#f8fafc"
+              borderRadius={0.08}
+              scrollSpeed={2.2}
+              scrollEase={0.04}
+            />
+          </div>
+          <p className={styles.programGalleryHint}>Scroll or drag to explore every field story.</p>
+        </div>
+        <div className={styles.sectionActions}>
+          <Link className="btn secondary" to="/works">
+            Explore more programs
+          </Link>
         </div>
       </section>
 
