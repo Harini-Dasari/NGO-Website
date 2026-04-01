@@ -12,7 +12,7 @@ import Admin from './pages/Admin'
 // Layout wrapper decides whether global elements render for a given route.
 const AppShell = () => {
   const location = useLocation()
-  const footerlessRoutes = new Set(['/about', '/works'])
+  const footerlessRoutes = new Set(['/about', '/works', '/volunteer', '/contact', '/admin'])
   const hideFooter = footerlessRoutes.has(location.pathname)
 
   return (

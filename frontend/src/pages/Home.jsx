@@ -48,14 +48,6 @@ const galleryItems = [
     image: 'https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=800&q=80',
     caption: 'Women&apos;s health circle · Kurnool',
   },
-  {
-    image: 'https://images.unsplash.com/photo-1511296265584-1c7ed261ad32?auto=format&fit=crop&w=800&q=80',
-    caption: 'Nutrition drive · Godavari delta',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80',
-    caption: 'Community reading club',
-  },
 ]
 
 const testimonials = [
