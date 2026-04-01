@@ -1,0 +1,374 @@
+.homePage {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.heroSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  background: var(--card);
+  border-radius: 32px;
+  border: 1px solid rgba(245, 124, 0, 0.2);
+  box-shadow: var(--shadow);
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection::before,
+.heroSection::after {
+  content: '';
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(21, 101, 192, 0.25) 0%, transparent 70%);
+  filter: blur(5px);
+  z-index: 0;
+}
+
+.heroSection::before {
+  top: -60px;
+  right: -40px;
+}
+
+.heroSection::after {
+  bottom: -80px;
+  left: -40px;
+}
+
+.heroEyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+.heroHeading {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+
+.highlight {
+  color: var(--orange);
+}
+
+.heroSubtext {
+  margin: 0;
+  color: var(--muted);
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.heroButtons .btn {
+  padding: 0.65rem 1.4rem;
+  font-size: 0.95rem;
+}
+
+.heroImageWrap {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  min-height: 320px;
+  box-shadow: var(--shadow);
+}
+
+.heroImageWrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.35));
+}
+
+.heroImageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.heroImageWrap:hover img {
+  transform: scale(1.06);
+}
+
+.sectionShell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sectionTag {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--orange);
+  margin: 0;
+}
+
+.sectionHeading {
+  margin: 0;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+}
+
+.sectionSubtext {
+  margin: 0;
+  color: var(--muted);
+  max-width: 620px;
+}
+
+.impactGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+}
+
+.impactCard {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 150px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.impactValue {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.statIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(21, 101, 192, 0.09);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.impactLabel {
+  margin: 0;
+  color: var(--muted);
+}
+
+.worksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.workCard {
+  background: var(--card);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.workImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.workImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.workCard:hover .workImage img {
+  transform: scale(1.08);
+}
+
+.workBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.workMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.workImpact {
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.ctaSection {
+  background: linear-gradient(135deg, rgba(245, 124, 0, 0.18), rgba(255, 248, 240, 0.95));
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border-radius: 28px;
+  border: 1px solid rgba(245, 124, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaText {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.galleryTile {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: var(--shadow);
+}
+
+.galleryTile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.galleryTile:hover img {
+  transform: scale(1.08);
+}
+
+.galleryOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.45));
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+.testimonialGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.testimonialCard {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.testimonialQuote {
+  font-style: italic;
+  margin: 0 0 1rem;
+  color: var(--text);
+}
+
+.testimonialName {
+  margin: 0;
+  font-weight: 600;
+}
+
+.testimonialRole {
+  margin: 0;
+  color: var(--muted);
+}
+
+.sectionActions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.floatingSpark {
+  position: absolute;
+  right: 1.5rem;
+  top: -0.5rem;
+  font-size: 1.5rem;
+  opacity: 0.4;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@media (max-width: 768px) {
+  .ctaSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heroButtons,
+  .sectionActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .heroButtons .btn,
+  .sectionActions .btn {
+    width: 100%;
+  }
+}
