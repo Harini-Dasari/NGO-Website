@@ -21,6 +21,10 @@ app.get('/', (req, res) => {
   res.send('API Running');
 });
 
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', time: new Date().toISOString() });
+});
+
 // API routes
 app.use('/api/volunteers', volunteerRoutes);
 app.use('/api/contacts', contactRoutes);
